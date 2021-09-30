@@ -1,0 +1,23 @@
+{
+    "name": "discovery",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^7.32.0"
+    },
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "evilscan": "^1.8.1",
+        "get-ip-range": "^4.0.1",
+        "netcat": "^1.5.0",
+        "node-port-scanner": "^3.0.1",
+        "telnet-client": "^1.4.9"
+    }
+}
