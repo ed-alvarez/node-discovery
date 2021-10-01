@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  openvpn:
+    image: kylemanna/openvpn
+    container_name: openvpn
+    environment:
+      - OVPN_DEBUG=yes
+    ports:
+      - "1194:1194/tcp"
+    networks:
+      - backend
+    volumes:
+      - openvpn-data:/etc/openvpn
+
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+    networks:
+      - backend
+    volumes:
+      - ./docker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+networks:
+  backend:
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+
+volumes:
+  openvpn-data:
+    external: true

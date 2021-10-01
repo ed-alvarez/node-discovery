@@ -137,6 +137,7 @@
         "newline-before-return": "off",
         "newline-per-chained-call": "off",
         "no-alert": "error",
+        "no-async-promise-executor": "off",
         "no-array-constructor": "error",
         "no-await-in-loop": "off",
         "no-bitwise": "off",
