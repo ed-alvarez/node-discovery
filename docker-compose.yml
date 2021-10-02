@@ -6,6 +6,9 @@ services:
     container_name: openvpn
     environment:
       - OVPN_DEBUG=yes
+      - DEBUG=1
+    cap_add:
+      - NET_ADMIN
     ports:
       - "1194:1194/tcp"
     networks:
@@ -16,12 +19,27 @@ services:
   mosquitto:
     image: eclipse-mosquitto
     container_name: mosquitto
-    ports:
-      - "1883:1883"
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - openvpn
     networks:
-      - backend
+      backend: 
+        ipv4_address: 10.0.0.10
     volumes:
       - ./docker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+  ntp:
+    image: cturra/ntp
+    container_name: ntp
+    environment:
+      - NTP_SERVERS=
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - openvpn
+    networks:
+      backend: 
+        ipv4_address: 10.0.0.11
 
 networks:
   backend:

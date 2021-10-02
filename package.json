@@ -2,9 +2,9 @@
     "name": "discovery",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "src/index.js",
     "scripts": {
-        "start": "node src/discovery.js"
+        "start": "node src/index.js"
     },
     "keywords": [],
     "author": "",
@@ -13,6 +13,9 @@
         "eslint": "^7.32.0"
     },
     "dependencies": {
-        "evilscan": "^1.8.1"
+        "async-mqtt": "^2.6.1",
+        "dotenv": "^10.0.0",
+        "evilscan": "^1.8.1",
+        "ping": "^0.4.1"
     }
 }

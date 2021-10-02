@@ -3,6 +3,8 @@ const Evilscan = require('evilscan');
 const ifTools = require('./lib/ifTools');
 const ipcalc = require('./lib/ipcalc');
 
+const log = process.env.NODE_ENV == 'dev' ? console.log.bind(console) : () => { };
+
 /**
  * @typedef {Object} IServices
  * @property {string} ip IP of interface
@@ -23,7 +25,6 @@ const ipcalc = require('./lib/ipcalc');
  */
 const scanHost = (target, { ports, concurrency }) =>
     new Promise((resolve, reject) => {
-        const log = process.env.NODE_ENV == 'dev' ? console.log.bind(console) : () => { };
 
         log(`Scanning network ${target} for ports ${ports}...`);
         log(`Concurrency: ${concurrency}`);
@@ -68,21 +69,26 @@ exports.run = async ({ maxRange = 70000, ports, concurrency = 10000, debug = fal
     process.env.MAX_RANGE = maxRange;
     process.env.NODE_ENV = debug ? 'dev' : 'prod';
 
-    const ips = await ifTools.getAll();
-    const solved = [];
+    try {
+        const ifs = await ifTools.getAll();
+        const solved = [];
 
-    for (const { ip, mask } of ips) {
-        const { networkAddr, hosts } = ipcalc.parse(`${ip}/${mask}`);
+        for (const ip of ifs) {
+            const { networkAddr, hosts } = ipcalc.parse(ip);
+            const mask = ip.split('/').pop();
 
-        if (hosts <= maxRange) {
-            const found = await scanHost(`${networkAddr}/${mask}`, {
-                ports,
-                concurrency
-            });
+            if (hosts <= maxRange && hosts != -1) {
+                const found = await scanHost(`${networkAddr}/${mask}`, {
+                    ports,
+                    concurrency
+                });
 
-            solved.push(...found);
+                solved.push(...found);
+            }
         }
-    }
 
-    return solved;
+        return solved;
+    } catch (err) {
+        console.error(err);
+    }
 };

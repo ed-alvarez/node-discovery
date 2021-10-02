@@ -1,0 +1,13 @@
+[Unit]
+Description=node-discovery service to handle OpenVPN across the entire network.
+After=network.target
+
+[Service]
+Environment=NODE_ENV=dev
+Type=simple
+User=root
+ExecStart=/usr/bin/node /usr/share/node-discovery
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
