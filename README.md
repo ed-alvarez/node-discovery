@@ -62,9 +62,7 @@ In order to run this script accordingly you need the following configuration and
 1. Install OpenVPN in the device or machine you want this script to run passively. For this guide we're going to use Debian 10. Assuming you already have Debian 10, run the following commands:
 
 ```
-$ sudo apt-get install -y nodejs
-$ sudo apt-get install -y openvpn
-$ sudo apt-get install -y build-essential
+$ sudo apt-get install -y nodejs openvpn build-essential
 ```
 
 2. After OpenVPN is installed, we need to configure its client service to autostart whenever we reboot. Run:
