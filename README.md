@@ -112,6 +112,6 @@ $ sudo systemctl start node-discovery
 
 # 3) Configuring node-discovery (optional)
 
-If you wish you configure node-discovery with an specific port or Mosquitto host, you can do so by editing the configuration file located in `/usr/share/node-discovery/.env`. This dotenv file holds all the configuration needed.
+If you wish you configure node-discovery with a specific port or Mosquitto host, you can do so by editing the configuration file located in `/usr/share/node-discovery/.env`. This dotenv file holds all the configuration needed.
 
 By default we use the configuration required by the services included in the mentioned `docker-compose.yml` file.
