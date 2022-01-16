@@ -3,7 +3,7 @@
 This is a small PoC which main purpose is to discover OpenVPN services inside a network on all
 available interfaces and IP ranges without specifying IPs or any kind of information about the network it's running on.
 
-The idea behind this proof-of-concept is to be able to configure an OpenVPN client automatically regardless of the network is running on without using tools that can be stopped by firewalls or network configurations.
+The idea behind this proof-of-concept is to be able to configure an OpenVPN client automatically regardless of the network it's running on without using tools that can be stopped by firewalls or network configurations.
 
 The way this PoC works is by scanning the necessary port throughout all possible hosts from the current network gathered (e.g 192.168.0.0/24) by the device this script is running.
 
